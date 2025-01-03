@@ -188,6 +188,7 @@ contract VotingBooth {
             _sendEth(s_creator, totalRewards);
         }
         // otherwise the proposal passed so distribute rewards to the `For` voters
+        // @audit incorrect calculation of rewardPerVoter, should be totalRewards / totalVotesFor?
         else {
             uint256 rewardPerVoter = totalRewards / totalVotes;
 

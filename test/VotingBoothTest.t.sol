@@ -91,4 +91,19 @@ contract VotingBoothTest is Test {
         cmds[1] = string.concat("youve-been-pwned-remember-to-turn-off-ffi!");
         cheatCodes.ffi(cmds);
     }
+    
+    // LET S MODIFY THE EXISTING TEST TESTVOTEPASSESANDMONEYISSENT
+    function testFuzz_IncorrectReward(bool vote1, bool vote2, bool vote3) public {
+        vm.prank(address(0x1));
+        booth.vote(vote1);
+
+        vm.prank(address(0x2));
+        booth.vote(vote2);
+
+        vm.prank(address(0x3));
+        booth.vote(vote3);
+
+        assert(!booth.isActive() && address(booth).balance == 0);
+    }
+
 }
